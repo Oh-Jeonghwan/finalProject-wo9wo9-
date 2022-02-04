@@ -54,7 +54,7 @@
 											
 										<c:otherwise>
 											<c:forEach var="bsi" items="${bestside}">
-												<div class="col-lg-3 col-md-4 col-sm-6 mix oranges">
+												<div class="col-lg-3 col-md-4 col-sm-6 mix vegetables">
 													<div class="featured__item">
 														<div class="featured__item__pic set-bg" data-setbg="${pageContext.request.contextPath}/${bsi.bestImg}">
 															<ul class="featured__item__pic__hover">
@@ -77,7 +77,7 @@
 										
 										<c:otherwise>
 										 <c:forEach var="r" items="${bestRice}">
-											<div class="col-lg-3 col-md-4 col-sm-6 mix vegetables">
+											<div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat">
 												<div class="featured__item">
 													<div class="featured__item__pic set-bg" data-setbg="${pageContext.request.contextPath}/${r.bestRice}">
 														<ul class="featured__item__pic__hover">
@@ -90,31 +90,31 @@
 											</div>
 										 </c:forEach>
 										</c:otherwise>
-								   </c:choose>
-						
-												  <!-- 국-->
-												  <c:choose>
-													<c:when test="${empty bestRice}">
-														<a>추천 없음</a>
-													</c:when>
-													
-													<c:otherwise>
-													 <c:forEach var="bs" items="${bestSoup}">
-						
-														<div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat">
-															<div class="featured__item">
-																<div class="featured__item__pic set-bg" data-setbg="${pageContext.request.contextPath}/${bs.bestSoup}">
-																	<ul class="featured__item__pic__hover">
-																	</ul>
-																</div>
-																<div class="featured__item__text">
-																	<h6><a href="#">${bs.sideName}</a></h6>
-																</div>
+								    </c:choose>
+								    
+								    <!-- 국 -->		  
+								    <c:choose>
+										<c:when test="${empty bestSoup}">
+											<a>추천 없음</a>
+										</c:when>
+								
+										<c:otherwise>
+											<c:forEach var="bs" items="${bestSoup}">
+				
+													<div class="col-lg-3 col-md-4 col-sm-6 mix oranges">
+														<div class="featured__item">
+															<div class="featured__item__pic set-bg" data-setbg="${pageContext.request.contextPath}/${bs.bestSoup}">
+																<ul class="featured__item__pic__hover">
+																</ul>
+															</div>
+															<div class="featured__item__text">
+																<h6><a href="#">${bs.sideName}</a></h6>
 															</div>
 														</div>
-													 </c:forEach>
-													</c:otherwise>
-											   </c:choose>
+													</div>
+											</c:forEach>
+										</c:otherwise>
+									</c:choose>
 							</section>
 	
 	</div>
