@@ -227,7 +227,7 @@
                                                 <select id="couponSelect">
                                                     <c:choose>
                                                         <c:when test="${empty cList }">
-                                                            <option id="asdf" value="-1">
+                                                            <option id="asdf" value="0">
                                                                 <div>쿠폰 없음</div>
                                                             </option>
                                                         </c:when>
@@ -281,7 +281,6 @@
                         </form>
                     </section>
                     <!-- Shoping Cart Section End -->
-                    <!-- 초기 뿌려주는 값 -->
 
                     <div id="footer">
                         <jsp:include page="../common/main_bottom.jsp"></jsp:include>
@@ -434,11 +433,11 @@
                             //쿠폰 적용 셀렉트
                             $('#couponSelect').change(function () {
                                 var subSummary = parseInt($(document.getElementById('subSummary')).text());
-                                var asdf = $("#couponSelect option:selected").text();
-
+                                var asdf = $("#couponSelect option:selected").val();
+                                
                                 //<div data-coupon="${c.coupon}"><div data-discount="${c.discount}">${c.discount}</div>
 
-                                if (asdf != -1) {
+                                if (asdf != -1 && asdf !=0) {
 
                                     var selectCoupon = $("#couponSelect option:selected").text();
                                     var asdfTrim = asdf.trim();
