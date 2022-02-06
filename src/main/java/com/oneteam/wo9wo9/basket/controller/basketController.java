@@ -102,7 +102,6 @@ public class basketController {
 	
 		int mNum = ((Member)session.getAttribute("loginUser")).getMemberNum();
 		Member m = basketService.orderMember(mNum);
-		System.out.println("coupon: "+couponNo);
 		request.setAttribute("count", count);
 		request.setAttribute("productName", productName);
 		request.setAttribute("bNum", bNum);
@@ -181,13 +180,10 @@ public class basketController {
 			
 			for(int i=0; i<bNum.size(); i++) {
 				int bNum2 = Integer.parseInt(bNum.get(i));
-				System.out.println(bNum2);
 				
 				s=basketService.paySeldoSelect(bNum2);
-				System.out.println("s: "+s);
 				
 				if(s!=null) {
-					System.out.println("s: "+ s);
 					//if 밖에서 먼저 뽑아오면 else()나 if(s==null)이 데드코드 남
 					int count1 = s.getCount();
 					int rice = s.getRice();
