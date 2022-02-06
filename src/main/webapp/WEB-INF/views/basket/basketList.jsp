@@ -433,11 +433,15 @@
                             //쿠폰 적용 셀렉트
                             $('#couponSelect').change(function () {
                                 var subSummary = parseInt($(document.getElementById('subSummary')).text());
-                                var asdf = $("#couponSelect option:selected").val();
                                 
-                                //<div data-coupon="${c.coupon}"><div data-discount="${c.discount}">${c.discount}</div>
+                                //쿠폰이 선택되지 않은 경우 사용될 값
+                                var noCoupon = $("#couponSelect option:selected").val();
+                                
+                                //쿠폰의 이름에서 쿠폰 할인률을 뽑아내기 위한 값
+                                var asdf = $("#couponSelect option:selected").text();
+                                
 
-                                if (asdf != -1 && asdf !=0) {
+                                if (noCoupon != -1 && noCoupon !=0) {
 
                                     var selectCoupon = $("#couponSelect option:selected").text();
                                     var asdfTrim = asdf.trim();
