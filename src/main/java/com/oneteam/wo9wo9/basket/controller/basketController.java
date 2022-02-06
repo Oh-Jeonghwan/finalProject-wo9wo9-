@@ -117,8 +117,9 @@ public class basketController {
 	@ResponseBody
 	@PostMapping("/cardCheck")
 	public Card cardCheck(@RequestParam String cardCom,
-							@RequestParam String cardPwd) {
-		int mNum = 2;
+						  @RequestParam String cardPwd,
+						  HttpSession session) {
+		int mNum = ((Member)session.getAttribute("loginUser")).getMemberNum();
 		
 		Card c = basketService.cardCheck(cardCom, cardPwd, mNum);
 		
@@ -173,7 +174,6 @@ public class basketController {
 			}
 		}
 		
-		System.out.println("result4: "+result4);
 		//상품 판매량 변경할 셀도 셀렉트
 		if(result4>0) {
 			Self s = new Self();
