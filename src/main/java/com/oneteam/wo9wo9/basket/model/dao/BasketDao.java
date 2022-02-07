@@ -48,6 +48,8 @@ public interface BasketDao {
 
 	int packageCountUpdeate(Map<String, Integer> map);
 
+	Member sendLoad();
+
 	
 
 }

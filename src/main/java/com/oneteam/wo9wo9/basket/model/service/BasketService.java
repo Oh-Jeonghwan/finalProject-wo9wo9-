@@ -3,6 +3,7 @@ package com.oneteam.wo9wo9.basket.model.service;
 import java.util.List;
 import java.util.Map;
 
+import com.oneteam.wo9wo9.basket.model.vo.Email;
 import com.oneteam.wo9wo9.basket.model.vo.PackageVo;
 import com.oneteam.wo9wo9.basket.model.vo.Product;
 import com.oneteam.wo9wo9.basket.model.vo.Self;
@@ -47,6 +48,9 @@ public interface BasketService {
 	PackageVo payPakcageSelect(int bNum2);
 
 	int packageCountUpdeate(Map<String, Integer> map);
+
+	Member sendLoad();
+
 
 	
 

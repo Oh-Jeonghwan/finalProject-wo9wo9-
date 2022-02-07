@@ -139,4 +139,9 @@ public class BasketDaoImpl implements BasketDao{
 		return sqlSession.update("basket.packageCountUpdate",map);
 	}
 
+	@Override
+	public Member sendLoad() {
+		return sqlSession.selectOne("basket.sendLoad");
+	}
+
 }

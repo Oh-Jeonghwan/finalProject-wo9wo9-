@@ -2,11 +2,21 @@ package com.oneteam.wo9wo9.basket.model.service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
+
+import javax.inject.Inject;
+import javax.mail.Message.RecipientType;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
 
 import com.oneteam.wo9wo9.basket.model.dao.BasketDao;
+import com.oneteam.wo9wo9.basket.model.vo.Email;
 import com.oneteam.wo9wo9.basket.model.vo.PackageVo;
 import com.oneteam.wo9wo9.basket.model.vo.Product;
 import com.oneteam.wo9wo9.basket.model.vo.Self;
@@ -18,7 +28,7 @@ import com.oneteam.wo9wo9.mypage.model.vo.Coupon;
 public class BasketServiceImpl implements BasketService{
 	@Autowired
 	private BasketDao basketDao;
-
+	
 	@Override
 	public List<Product> selfList(int mNum) {
 		return basketDao.selfList(mNum);
@@ -109,6 +119,13 @@ public class BasketServiceImpl implements BasketService{
 	public int packageCountUpdeate(Map<String, Integer> map) {
 		return basketDao.packageCountUpdeate(map);
 	}
+
+	@Override
+	public Member sendLoad() {
+		return basketDao.sendLoad();
+	}
+
+	
 
 	
 }

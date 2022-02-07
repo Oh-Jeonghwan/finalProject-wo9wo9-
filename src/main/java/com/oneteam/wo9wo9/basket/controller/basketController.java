@@ -3,11 +3,18 @@ package com.oneteam.wo9wo9.basket.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.oneteam.wo9wo9.basket.model.service.BasketService;
+import com.oneteam.wo9wo9.basket.model.vo.Email;
 import com.oneteam.wo9wo9.basket.model.vo.PackageVo;
 import com.oneteam.wo9wo9.basket.model.vo.Product;
 import com.oneteam.wo9wo9.basket.model.vo.Self;
@@ -30,6 +38,29 @@ import com.oneteam.wo9wo9.mypage.model.vo.Coupon;
 public class basketController {
 	@Autowired
 	private BasketService basketService;
+	
+	@Autowired
+	private JavaMailSender mailSender;
+	@Bean
+	public JavaMailSenderImpl mailSender() {
+		Properties props = new Properties();
+		props.put("mail.smtp.starttls.enable","true");
+	    props.put("mail.transport.protocol", "smtp");
+	    props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.debug","true");
+		
+		JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
+		javaMailSender.setProtocol("smtp");
+		javaMailSender.setHost("smtp.gmail.com");
+		javaMailSender.setPort(587);
+		javaMailSender.setUsername("vmflwmf");
+		javaMailSender.setPassword("dctbcabmwdnpkphv");
+		javaMailSender.setDefaultEncoding("UTF-8");
+		javaMailSender.setJavaMailProperties(props);
+		
+		return javaMailSender;
+	} 
+	
 	@GetMapping("/list")
 	public String basketList(Model model,
 							HttpServletRequest request,
@@ -201,7 +232,6 @@ public class basketController {
 				}
 				else {
 					p=basketService.payPakcageSelect(bNum2);
-					System.out.println("p: "+ p);
 					if(p != null) {
 						
 						int count2 = p.getCount();
@@ -221,7 +251,42 @@ public class basketController {
 		
 		//오더리스트 추가 후 구매완료 alert
 		if(result5>0) {
-			session.setAttribute("alertMsg", "결제가 완료되었습니다.");
+			Member admin = new Member();
+			
+			admin = basketService.sendLoad();
+			
+			Email email = new Email();
+			
+			email.setSenderName(admin.getMemberId());
+			email.setSenderMail(admin.getEmail());
+			email.setReceiveMail(((Member)session.getAttribute("loginUser")).getEmail());
+			email.setMessage("구매가 완료되었습니다.");
+			email.setSubject("구매관련 건에 대하여");
+			
+			
+			MimeMessage message = mailSender.createMimeMessage();
+			
+				try {
+					
+					MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+					
+					//받는 사람 설정
+					messageHelper.setTo(email.getReceiveMail());
+					//보내는 사람
+					messageHelper.setFrom(email.getSenderMail());
+					
+					//이메일 제목
+					messageHelper.setSubject(email.getSubject());
+					
+					//이메일 내용
+					messageHelper.setText(email.getMessage());
+					
+					mailSender.send(message);
+				} catch (MessagingException e) {
+					e.printStackTrace();
+				}
+				
+			session.setAttribute("alertMsg", "결제가 완료되었습니다. 이메일을 확인해주세요");
 			return "redirect:../main/main.do";
 		}
 		else {

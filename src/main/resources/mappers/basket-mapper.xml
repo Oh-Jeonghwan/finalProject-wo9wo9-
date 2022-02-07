@@ -131,4 +131,10 @@
 			DEFAULT ) 	
   	</insert>
   	
+  	<select id="sendLoad" resultType="member">
+  		SELECT *
+  		FROM MEMBER
+  		WHERE MEMBER_ID='admin'
+  	</select>
+  	
   </mapper>
