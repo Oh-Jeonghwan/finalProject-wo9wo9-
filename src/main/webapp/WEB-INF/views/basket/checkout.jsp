@@ -130,8 +130,7 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="checkout__input">
-                                            <button type="button" class="site-btn" id="cardCheckBtn">카드
-                                                확인</button>
+                                            <button type="button" class="site-btn" id="cardCheckBtn">카드 확인</button>
                                         </div>
                                     </div>
                                 </div>
