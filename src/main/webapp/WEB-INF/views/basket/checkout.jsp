@@ -65,6 +65,7 @@
                     <h4>주문 상세 내용</h4>
                     <form action="checkout" method="post">
                         <!-- --------------------------------------------------------------- -->
+                        <!-- 반복문으로 배열을 인풋태그에 담으면 덮어쓰기가 아닌 배열로 담긴다. -->
                         <c:forEach var="c" items="${bNum }">
                             <input type="hidden" class="bNum" name="bNum" value="${c }">
                         </c:forEach>
