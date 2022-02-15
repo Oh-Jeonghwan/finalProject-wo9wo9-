@@ -53,8 +53,8 @@ public class basketController {
 		javaMailSender.setProtocol("smtp");
 		javaMailSender.setHost("smtp.gmail.com");
 		javaMailSender.setPort(587);
-		javaMailSender.setUsername("아이디");//아이디
-		javaMailSender.setPassword("비밀번호");
+		javaMailSender.setUsername("vmflwmf");//아이디
+		javaMailSender.setPassword("dctbcabmwdnpkphv");
 		javaMailSender.setDefaultEncoding("UTF-8");
 		javaMailSender.setJavaMailProperties(props);
 		
