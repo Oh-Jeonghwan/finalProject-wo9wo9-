@@ -92,7 +92,6 @@ public class MainController {
 			Model model) {
 		// 반찬 베스트 3
 		List<Main> bestside = mainService.bestSelfImg();
-		
 		model.addAttribute("bestside", bestside);
 		
 		// 패키지 베스트
